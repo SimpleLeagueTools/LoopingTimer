@@ -12,13 +12,19 @@
     <link rel="stylesheet" type="text/css" href="./style.css">
     <script src="./script.js"></script>
 </head>
-<body>
+<body class="dark">
     <div class="content">
         <div id="beep">
             <h1>Looping Timer</h1>
             <hr />
 
             <p>"<a href="http://soundbible.com/1669-Robot-Blip-2.html" target="_blank">Robot Blip 2</a>" by Marianne Gagnon is licensed under <a href="https://creativecommons.org/licenses/by/3.0/" target="_blank">CC BY 3.0</a></p>
+
+            <label for="light-theme">Light Theme
+                <input id="light-theme" type="checkbox">
+            </label>
+
+            <br />
 
             <label for="time-to-repeat">Interval (Secs):
                 <input id="time-to-repeat">
@@ -32,7 +38,7 @@
             <br />
 
             <div class="no-space">
-                <button id="start-interval">Start</button>
+                <button id="start-interval">Restart</button>
                 <button id="stop-interval">Stop</button>
                 <button id="reset-interval">Reset</button>
             </div>

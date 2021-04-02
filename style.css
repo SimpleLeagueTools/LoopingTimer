@@ -14,6 +14,20 @@ body {
     font-family: Karla;
 }
 
+.dark {
+    color: #D3D3D3;
+    background-color: black;
+}
+
+.dark button, .dark input {
+    color: #D3D3D3;
+    background-color: black;
+}
+
+.dark a {
+    color: skyblue;
+}
+
 .content {
     display: flex;
     flex-direction: column;
@@ -61,11 +75,8 @@ button {
     margin-top: 20px;
 }
 
-#last-ring {
+input[type="checkbox"] {
     height: 1.5em;
     width: 1.5em;
     vertical-align: sub;
-}
-
-label {
 }

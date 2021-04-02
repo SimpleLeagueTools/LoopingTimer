@@ -68,6 +68,16 @@ function initiate() {
     replaceElementWithText(timerObject.timeRemaining, repeatValue)
     replaceElementWithText(timerObject.currentInterval, repeatValue);
 
+    // Dark theme toggle
+    var themeToggler = document.getElementById('light-theme');
+    themeToggler.addEventListener('change', function () {
+        if (this.checked) {
+            document.getElementsByTagName('body')[0].classList = "";
+        } else {
+            document.getElementsByTagName('body')[0].classList = "dark";
+        }
+    });
+
     document.getElementById('start-interval').click();
 }
 
@@ -204,3 +214,4 @@ function replaceElementWithText(element, text) {
     element.appendChild(tn);
     return;
 }
+
