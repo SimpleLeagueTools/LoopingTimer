@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Looping Timer</title>
+    <link rel="shortcut icon" type="image/jpg" href="./clock.ico"/>
+    <link rel="stylesheet" type="text/css" href="./style.css">
+    <script src="./script.js"></script>
+</head>
+<body>
+    <div class="content">
+        <div id="beep">
+            <h1>Looping Timer</h1>
+            <hr />
+
+            <p>"<a href="http://soundbible.com/1669-Robot-Blip-2.html" target="_blank">Robot Blip 2</a>" by Marianne Gagnon is licensed under <a href="https://creativecommons.org/licenses/by/3.0/" target="_blank">CC BY 3.0</a></p>
+
+            <label for="time-to-repeat">Interval (Secs):
+                <input id="time-to-repeat">
+            </label>
+            <br />
+
+            <label for="last-ring">Stop after next ring
+                <input id="last-ring" type="checkbox">
+            </label>
+
+            <br />
+
+            <div class="no-space">
+                <button id="start-interval">Start</button>
+                <button id="stop-interval">Stop</button>
+                <button id="reset-interval">Reset</button>
+            </div>
+
+            <p>Current Interval: <span id="current-interval">5</span></p>
+            <h2>Time Remaining</h2>
+            <h3 id="time-remaining">5</h3>
+        </div>
+    </div>
+</body>
+</html>

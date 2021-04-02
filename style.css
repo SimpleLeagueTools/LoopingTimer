@@ -1,0 +1,67 @@
+@font-face {
+    font-family: Karla;
+    src: url(./Karla-Regular.ttf);
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 90vh;
+    font-family: Karla;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    min-width: 280px;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 10px;
+}
+
+h1 {
+    margin: 0 auto;
+    text-align: center;
+}
+
+h1, h2, h3 {
+    margin: 0;
+}
+
+h3 {
+    font-size: 2em;
+}
+
+#time-to-repeat {
+    margin-bottom: 10px;
+    vertical-align: baseline;
+    height: 2em;
+    width: 120px;
+}
+
+button {
+    line-height: 0;
+    padding: 0;
+    margin: 0;
+    height: 3em;
+    flex-grow: 1;
+}
+
+.no-space {
+    display: flex;
+    max-width: 420px;
+    width: 100%;
+    font-size: 0;
+    margin-top: 20px;
+}
+
+#last-ring {
+    height: 1.5em;
+    width: 1.5em;
+    vertical-align: sub;
+}
+
+label {
+}
