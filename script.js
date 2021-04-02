@@ -23,7 +23,8 @@ function initiate() {
         buttonStop: document.getElementById('stop-interval'),
         buttonReset: document.getElementById('reset-interval'),
         tickTime: 10, // Accurate to 10 milliseconds
-        displayTicks: 200 // Display every 200ms
+        displayTicks: 200, // Display every 200ms
+        volume: 50
     };
 
     // These 3 click listeners are structured this way since I changed the 
@@ -70,13 +71,11 @@ function initiate() {
 
     // Dark theme toggle
     var themeToggler = document.getElementById('light-theme');
-    themeToggler.addEventListener('change', function () {
-        if (this.checked) {
-            document.getElementsByTagName('body')[0].classList = "";
-        } else {
-            document.getElementsByTagName('body')[0].classList = "dark";
-        }
-    });
+    handleThemeToggle(themeToggler);
+
+    // Volume Slider
+    var volumeControl = document.getElementById('volume-control');
+    handleVolumeControlEvent(timerObject, volumeControl);
 
     document.getElementById('start-interval').click();
 }
@@ -114,6 +113,8 @@ function setTimer(timerObject) {
     
     // Plays when you press "Start" to give feedback
     timerObject.audioSound.play();
+    timerObject.audioSound.volume = timerObject.volume / 100;
+    console.log(timerObject);
     timerObject.currentStartTime = Date.now();
     timerObject.currentEndTime = timerObject.currentStartTime + 
                                     timerObject.resetNumber * 1000;
@@ -124,6 +125,8 @@ function setTimer(timerObject) {
         if (timerObject.currentEndTime <= currentTime) {
             timerObject.audioSound.load();
             timerObject.audioSound.play();
+            volumeControl(timerObject.audioSound, timerObject.volume)
+            console.log(timerObject);
             // Handles 2a, "Stop after next ring" is checked. 
             // This is lazy loaded, so if it rings twice, then you check it,
             // it'll stop after the next ring
@@ -215,3 +218,23 @@ function replaceElementWithText(element, text) {
     return;
 }
 
+function handleThemeToggle(themeToggler) {
+    themeToggler.addEventListener('change', function () {
+        if (this.checked) {
+            document.getElementsByTagName('body')[0].classList = "";
+        } else {
+            document.getElementsByTagName('body')[0].classList = "dark";
+        }
+    });
+}
+
+function handleVolumeControlEvent(timerObject, element) {
+    element.addEventListener('change', function (e) {
+        timerObject.volume = e.target.value;
+    });
+}
+
+function volumeControl(audio, volume) {
+    audio.volume = volume / 100;
+    return;
+}
