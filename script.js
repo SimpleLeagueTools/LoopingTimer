@@ -1,7 +1,3 @@
-/* This Source Code Form is subject to the terms of the Mozilla Public
- * License, v. 2.0. If a copy of the MPL was not distributed with this
- * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
-
 document.addEventListener('DOMContentLoaded', function () {
     initiate();
 });
@@ -26,7 +22,8 @@ function initiate() {
         buttonStart: document.getElementById('start-interval'),
         buttonStop: document.getElementById('stop-interval'),
         buttonReset: document.getElementById('reset-interval'),
-        tickTime: 200, // 200 milliseconds
+        tickTime: 10, // Accurate to 10 milliseconds
+        displayTicks: 200 // Display every 200ms
     };
 
     // These 3 click listeners are structured this way since I changed the 
@@ -113,7 +110,8 @@ function setTimer(timerObject) {
 
     // This is the heavy lifting. This just CHECKS. 
     var timer = window.setInterval((function (timerObject) {
-        if (timerObject.currentEndTime <= Date.now()) {
+        var currentTime = Date.now();
+        if (timerObject.currentEndTime <= currentTime) {
             timerObject.audioSound.load();
             timerObject.audioSound.play();
             // Handles 2a, "Stop after next ring" is checked. 
@@ -129,8 +127,9 @@ function setTimer(timerObject) {
             timerObject.currentEndTime = timerObject.currentStartTime 
                 + timerObject.resetNumber * 1000;
         }
+
         // "tick" just displays the values in the DOM
-        tick(timerObject)
+        tick(timerObject, currentTime)
 
         timerObject.activeTimer = timer;
         return;
@@ -174,12 +173,21 @@ function resetTimer(timerObject) {
 /**
  * @function tick Displays the current timer in the #time-remaining
  * @param {object} timerObject 
+ * @param {int} currentTime Maintain consistency by passing it in
  */
-function tick(timerObject) {
-    var displayedTime = 
-        ((timerObject.currentEndTime - Date.now()) / 1000).toFixed(2);
-
-    replaceElementWithText(timerObject.timeRemaining, displayedTime);
+function tick(timerObject, currentTime) {
+    // Change the DOM every 200ms, but calculate time every 10ms.
+    // Only show clean numbers by calculating clean tick windows
+    var lastDigitTime = (timerObject.currentEndTime - currentTime) 
+                            % timerObject.displayTicks;
+    var halfTickTime = timerObject.tickTime / 2;
+    if (lastDigitTime < halfTickTime 
+        || timerObject.displayTicks - halfTickTime < lastDigitTime ) {
+        var displayedTime = 
+            ((timerObject.currentEndTime - Date.now()) / 1000).toFixed(2);
+    
+        replaceElementWithText(timerObject.timeRemaining, displayedTime);
+    }
     return;
 }
 
